@@ -27,7 +27,19 @@ class TournamentFactory extends Factory
             'end_date' => $this->faker->optional()->dateTimeBetween('+1 month', '+2 months'),
             'location' => $this->faker->optional()->city(),
             'max_participants' => $this->faker->numberBetween(8, 64),
-            'status' => $this->faker->randomElement(['open', 'closed', 'in progress', 'completed']),
+            'per_team' => function (array $attributes) {
+                $maxParticipants = $attributes['max_participants'];
+                $divisors = [];
+
+                for ($i = 1; $i <= $maxParticipants; $i++) {
+                    if ($maxParticipants % $i === 0) {
+                        $divisors[] = $i;
+                    }
+                }
+
+                return $this->faker->randomElement($divisors);
+            },
+            'status' => $this->faker->randomElement(['open', 'scheduled', 'ongoing', 'finished']),
         ];
     }
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tournament;
-use App\Models\Game;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
@@ -36,12 +34,13 @@ class TournamentController extends Controller
             'game_id' => 'required|exists:games,id',
             'creator_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after:start_date',
             'location' => 'nullable|string|max:255',
             'max_participants' => 'required|integer|min:1',
-            'status' => 'required|in:scheduled,ongoing,finished'
+            'per_team' => 'required|integer|in:' . implode(',', $this->getDivisors($request->max_participants)),
+            'status' => 'required|in:scheduled,ongoing,finished,open'
         ]);
 
         $tournament = Tournament::create([
@@ -50,15 +49,12 @@ class TournamentController extends Controller
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
             'start_date' => $validatedData['start_date'],
-            'end_date' => $validatedData['end_date'] ?? null, //Dodane obsługa null
-            'location' => $validatedData['location'] ?? null, //Dodane obsługa null
+            'end_date' => $validatedData['end_date'] ?? null,
+            'location' => $validatedData['location'] ?? null,
             'max_participants' => $validatedData['max_participants'],
+            'per_team' => $validatedData['per_team'],
             'status' => $validatedData['status'],
         ]);
-
-        if (isset($validatedData['teams'])) {
-            $tournament->teams()->sync($validatedData['teams']);
-        }
 
         return redirect()->route('tournaments.index');
     }
@@ -68,16 +64,15 @@ class TournamentController extends Controller
      */
     public function show(string $id)
     {
-        $tournament = Tournament::with(['games', 'users', 'teams'])->findOrFail($id);
+        $tournament = Tournament::with(['games', 'users', 'tournament_games', 'tournament_user'])->findOrFail($id);
 
-        // Przekazujemy obiekt Tournament oraz powiązane dane do widoku
         return view('tournaments.show', compact('tournament'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tournament $tournament)
     {
         return view('tournaments.edit', compact('tournament'));
     }
@@ -96,6 +91,7 @@ class TournamentController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'location' => 'nullable|string|max:255',
             'max_participants' => 'required|integer|min:1',
+            'per_team' => 'required|integer|in:' . implode(',', $this->getDivisors($request->max_participants)),
             'status' => 'required|in:scheduled,ongoing,finished',
             'teams' => 'nullable|array',
             'teams.*' => 'exists:teams,id',
@@ -111,12 +107,9 @@ class TournamentController extends Controller
             'end_date' => $validatedData['end_date'] ?? null,
             'location' => $validatedData['location'] ?? null,
             'max_participants' => $validatedData['max_participants'],
+            'per_team' => $validatedData['per_team'],
             'status' => $validatedData['status'],
         ]);
-
-        if (isset($validatedData['teams'])) {
-            $tournament->teams()->sync($validatedData['teams']);
-        }
 
         return redirect()->route('tournaments.index');
     }
@@ -128,5 +121,16 @@ class TournamentController extends Controller
     {
         $tournament->delete();
         return redirect()->route('tournaments.index');
+    }
+
+    private function getDivisors($number)
+    {
+        $divisors = [];
+        for ($i = 1; $i <= $number; $i++) {
+            if ($number % $i === 0) {
+                $divisors[] = $i;
+            }
+        }
+        return $divisors;
     }
 }

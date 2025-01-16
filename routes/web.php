@@ -2,8 +2,17 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\GameTeamController;
+use App\Http\Controllers\GameTagController;
+use App\Http\Controllers\TournamentGameController;
 
 Route::resource('tournaments', TournamentController::class);
+Route::resource('tournaments', GameController::class);
+Route::resource('tournaments', GameTeamController::class);
+Route::resource('tournaments', GameTagController::class);
+Route::resource('tournaments', TournamentGameController::class);
 
 Route::get('/', function () {
     return view('welcome');

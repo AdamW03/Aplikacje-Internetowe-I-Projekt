@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('end_date')->nullable();
             $table->string('location')->nullable();
             $table->integer('max_participants');
+            $table->integer('per_team');
             $table->string('status');
             $table->timestamps();
         });

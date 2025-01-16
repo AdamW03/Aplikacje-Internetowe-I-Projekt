@@ -18,6 +18,7 @@ class Tournament extends Model
         'end_date',
         'location',
         'max_participants',
+        'per_team',
         'status',
     ];
 
