@@ -9,10 +9,10 @@ use App\Http\Controllers\GameTagController;
 use App\Http\Controllers\TournamentGameController;
 
 Route::resource('tournaments', TournamentController::class);
-Route::resource('tournaments', GameController::class);
-Route::resource('tournaments', GameTeamController::class);
-Route::resource('tournaments', GameTagController::class);
-Route::resource('tournaments', TournamentGameController::class);
+Route::resource('games', GameController::class);
+Route::resource('game_teams', GameTeamController::class);
+Route::resource('game_tags', GameTagController::class);
+Route::resource('tournament_games', TournamentGameController::class);
 
 Route::get('/', function () {
     return view('welcome');
