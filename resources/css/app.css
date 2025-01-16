@@ -1,3 +1,124 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body.font-small {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
+
+body.font-normal {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+body.font-large {
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+}
+
+body.font-small h1 {
+    font-size: 1.5rem;
+}
+body.font-small h2 {
+    font-size: 1.25rem;
+}
+body.font-small h3 {
+    font-size: 1.125rem;
+}
+
+body.font-normal h1 {
+    font-size: 2rem;
+}
+body.font-normal h2 {
+    font-size: 1.75rem;
+}
+body.font-normal h3 {
+    font-size: 1.5rem;
+}
+
+body.font-large h1 {
+    font-size: 2.5rem;
+}
+body.font-large h2 {
+    font-size: 2rem;
+}
+body.font-large h3 {
+    font-size: 1.75rem;
+}
+
+body.contrast {
+    background-color: black;
+    color: yellow;
+}
+
+body.contrast a {
+    color: yellow;
+}
+
+body.contrast h1,
+body.contrast h2,
+body.contrast h3,
+body.contrast h4,
+body.contrast h5,
+body.contrast h6 {
+    color: yellow;
+}
+
+body.contrast button {
+    background-color: yellow;
+    color: black;
+}
+
+body.contrast * {
+    background-color: black;
+    color: yellow;
+}
+
+body.font-small *,
+body.font-normal *,
+body.font-large * {
+    font-family: Arial, sans-serif;
+}
+
+body.font-small a,
+body.font-normal a,
+body.font-large a {
+    font-size: inherit;
+}
+
+body.font-small select,
+body.font-normal select,
+body.font-large select {
+    font-size: inherit;
+}
+
+body.font-small button,
+body.font-normal button,
+body.font-large button {
+    font-size: inherit;
+}
+
+body.font-small p,
+body.font-normal p,
+body.font-large p {
+    font-size: inherit;
+}
+
+body.font-small label,
+body.font-normal label,
+body.font-large label {
+    font-size: inherit;
+}
+
+body.font-small input,
+body.font-normal input,
+body.font-large input {
+    font-size: inherit;
+}
+
+body.font-small textarea,
+body.font-normal textarea,
+body.font-large textarea {
+    font-size: inherit;
+}

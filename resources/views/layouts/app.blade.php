@@ -16,10 +16,12 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/js/accessibility.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
+            <div class="mb-14"></div>
 
             <!-- Page Heading -->
             @isset($header)

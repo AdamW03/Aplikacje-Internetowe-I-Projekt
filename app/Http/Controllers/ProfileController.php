@@ -75,4 +75,22 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+//    public function updateAccessibility(Request $request)
+//    {
+//        $request->validate([
+//            'font_size' => 'in:small,normal,large',
+//            'high_contrast' => 'boolean',
+//        ]);
+//
+//        if ($request->has('font_size')) {
+//            session(['font_size' => $request->input('font_size')]);
+//        }
+//
+//        if ($request->has('high_contrast')) {
+//            session(['high_contrast' => $request->input('high_contrast')]);
+//        }
+//
+//        return back();
+//    }
 }
