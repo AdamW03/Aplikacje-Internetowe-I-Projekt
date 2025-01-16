@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Nette\Utils\Image;
 
 class ProfileController extends Controller
 {
@@ -33,13 +34,15 @@ class ProfileController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $request->user()->id,
             'country' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:1000',
-            'avatar' => 'nullable|image|max:2048',
+            'avatars' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-            $validatedData['avatar'] = $avatarPath;
+        if ($request->hasFile('avatars')) {
+            $avatarPath = $request->file('avatars')->store('avatars', 'public');
+            $fileName = basename($avatarPath);
+            $validatedData['avatars'] = $fileName;
         }
+
 
         $user->fill($validatedData);
 

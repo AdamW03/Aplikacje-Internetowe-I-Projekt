@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->string('country')->nullable();
             $table->text('description')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('avatars')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

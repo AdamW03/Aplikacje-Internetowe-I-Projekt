@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Update your account's profile information and email address and set profile picture.") }}
         </p>
     </header>
 
@@ -13,9 +13,15 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('patch')
+
+        <div>
+            <x-input-label for="avatars" :value="__('Profile Picture')" />
+            <input type="file" id="avatars" name="avatars" class="mt-1 block w-full" accept="image/*" />
+            <x-input-error class="mt-2" :messages="$errors->get('avatars')" />
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -45,6 +51,18 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="country" :value="__('Country')" />
+            <x-text-input id="country" name="country" type="text" class="mt-1 block w-full" :value="old('country', $user->country)" />
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
+        </div>
+
+        <div>
+            <x-input-label for="description" :value="__('Description')" />
+            <textarea id="description" name="description" class="mt-1 block w-full" rows="4">{{ old('description', $user->description) }}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 
         <div class="flex items-center gap-4">

@@ -12,9 +12,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    @endauth
+                    @guest
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            {{ __('Log In') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Register') }}
+                        </x-nav-link>
+                    @endguest
                 </div>
             </div>
 
@@ -23,6 +33,9 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <img src="{{ asset('storage/avatars/' . Auth::user()->avatars) }}" alt="User Avatar" class="block h-12 w-auto rounded-lg shadow-lg mx-auto mr-4">
+
+
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">

@@ -14,9 +14,11 @@ Route::resource('game_teams', GameTeamController::class);
 Route::resource('game_tags', GameTagController::class);
 Route::resource('tournament_games', TournamentGameController::class);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TournamentController::class, 'index'])->name('home');
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
