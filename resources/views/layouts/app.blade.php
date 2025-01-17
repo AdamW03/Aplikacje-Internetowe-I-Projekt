@@ -54,6 +54,8 @@
                         <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
                         <ul class="space-y-2">
                             <li><a href="{{ route('tournaments.index') }}" class="text-gray-400 hover:text-white">Tournaments</a></li>
+                            <li><a href="{{ route('games.index') }}" class="text-gray-400 hover:text-white">Games</a></li>
+                            <li><a href="{{ route('game_tags.index') }}" class="text-gray-400 hover:text-white">Game Tags</a></li>
                             <li><a href="{{ route('welcome') }}" class="text-gray-400 hover:text-white">About</a></li>
                         </ul>
                     </div>

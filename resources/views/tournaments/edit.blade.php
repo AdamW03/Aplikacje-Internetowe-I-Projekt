@@ -78,8 +78,14 @@
             </div>
 
             <!-- Submit Button -->
-            <div class="col-span-full sm:col-span-2 flex justify-center">
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Update Tournament</button>
+{{--            <div class="col-span-full sm:col-span-2 flex justify-center">--}}
+{{--                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Update Tournament</button>--}}
+{{--            </div>--}}
+            <div class="flex items-center justify-between col-span-full">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full sm:w-auto">
+                    Update Tournament
+                </button>
+                <a href="{{ route('tournaments.show', $tournament->id); }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
             </div>
         </form>
     </div>

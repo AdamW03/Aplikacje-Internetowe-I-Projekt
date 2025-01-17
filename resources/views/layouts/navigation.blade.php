@@ -15,7 +15,15 @@
                     <x-nav-link :href="route('tournaments.index')" :active="request()->routeIs('tournaments.index')">
                         {{ __('Tournaments') }}
                     </x-nav-link>
-{{--                    @auth--}}
+                    <x-nav-link :href="route('games.index')" :active="request()->routeIs('games.index')">
+                        {{ __('Games') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('game_tags.index')" :active="request()->routeIs('game_tags.index')">
+                        {{ __('Game Tags') }}
+                    </x-nav-link>
+
+                    {{--                    @auth--}}
 {{--                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">--}}
 {{--                            {{ __('Dashboard') }}--}}
 {{--                        </x-nav-link>--}}
