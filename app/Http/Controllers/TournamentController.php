@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tournament;
+use App\Models\Game;
+use App\Models\GameTag;
 use Illuminate\Http\Request;
 
 class TournamentController extends Controller
@@ -12,9 +14,30 @@ class TournamentController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 25);
-        $tournaments = Tournament::paginate($perPage);
-        return view('tournaments.index', compact('tournaments'));
+        $query = Tournament::with(['games.game_tags', 'creator_users', 'participant_users']);
+
+        if ($request->has('tournament_name') && $request->tournament_name) {
+            $query->where('name', 'like', '%' . $request->tournament_name . '%');
+        }
+
+        if ($request->has('game_name') && $request->game_name) {
+            $query->whereHas('games', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->game_name . '%');
+            });
+        }
+
+        if ($request->has('game_tag') && $request->game_tag) {
+            $query->whereHas('games.game_tags', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->game_tag . '%');
+            });
+        }
+
+        $tournaments = $query->paginate(10);
+
+        $games = Game::all();
+        $gameTags = GameTag::all();
+
+        return view('tournaments.index', compact('tournaments', 'games', 'gameTags'));
     }
 
     /**

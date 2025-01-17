@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['user', 'admin']),
             'country' => fake()->country(),
             'description' => fake()->sentence(),
-            'avatars' => fake()->imageUrl(100, 100, 'people', true, 'Avatar'),
+//            'avatars' => fake()->imageUrl(100, 100, 'people', true, 'Avatar'),
             'remember_token' => Str::random(10),
         ];
     }

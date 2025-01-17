@@ -53,7 +53,7 @@
                     <div>
                         <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white">Tournaments</a></li>
+                            <li><a href="{{ route('tournaments.index') }}" class="text-gray-400 hover:text-white">Tournaments</a></li>
                             <li><a href="{{ route('welcome') }}" class="text-gray-400 hover:text-white">About</a></li>
                         </ul>
                     </div>

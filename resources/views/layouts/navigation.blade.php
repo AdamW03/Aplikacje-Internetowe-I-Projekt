@@ -12,11 +12,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('tournaments.index')" :active="request()->routeIs('tournaments.index')">
+                        {{ __('Tournaments') }}
+                    </x-nav-link>
                     @auth
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     @endauth
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('About') }}
+                    </x-nav-link>
                     @guest
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             {{ __('Log In') }}
@@ -25,9 +31,6 @@
                             {{ __('Register') }}
                         </x-nav-link>
                     @endguest
-                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                        {{ __('About') }}
-                    </x-nav-link>
                 </div>
             </div>
 
