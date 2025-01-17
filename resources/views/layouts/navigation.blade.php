@@ -15,11 +15,11 @@
                     <x-nav-link :href="route('tournaments.index')" :active="request()->routeIs('tournaments.index')">
                         {{ __('Tournaments') }}
                     </x-nav-link>
-                    @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    @endauth
+{{--                    @auth--}}
+{{--                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">--}}
+{{--                            {{ __('Dashboard') }}--}}
+{{--                        </x-nav-link>--}}
+{{--                    @endauth--}}
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('About') }}
                     </x-nav-link>

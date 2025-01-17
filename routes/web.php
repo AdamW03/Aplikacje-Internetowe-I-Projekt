@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::post('tournaments/{tournament}/join', [TournamentController::class, 'join'])->name('tournaments.join');
+Route::delete('tournaments/{tournament}/leave', [TournamentController::class, 'leave'])->name('tournaments.leave');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

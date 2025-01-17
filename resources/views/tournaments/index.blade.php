@@ -1,53 +1,76 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <x-slot name="header">
-            <h1 class="text-2xl font-semibold text-gray-800">Turnieje</h1>
+            <h1 class="text-2xl font-semibold text-gray-800">Tournaments</h1>
         </x-slot>
 
-        <!-- Filtracja -->
+        <!-- Creating -->
+        @auth
+            <div class="mb-6">
+                <div class="col-span-full sm:col-span-2 flex justify-center mt-4">
+                    <a href="{{ route('tournaments.create') }}" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 text-center">Create Tournament</a>
+                </div>
+            </div>
+        @endauth
+
+        <!-- Filtration -->
         <div class="mb-6">
-            <form action="{{ route('tournaments.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Filtrowanie po nazwie turnieju -->
+            <form action="{{ route('tournaments.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                <!-- Filtering by tournament name -->
                 <div>
-                    <label for="tournament_name" class="block text-gray-700">Nazwa turnieju</label>
+                    <label for="tournament_name" class="block text-gray-700">Tournament Name</label>
                     <input type="text" name="tournament_name" id="tournament_name" value="{{ request('tournament_name') }}" class="mt-1 block w-full border-gray-300 rounded-md">
                 </div>
 
-                <!-- Filtrowanie po nazwie gry -->
+                <!-- Filtering by game name -->
                 <div>
-                    <label for="game_name" class="block text-gray-700">Nazwa gry</label>
+                    <label for="game_name" class="block text-gray-700">Game Name</label>
                     <select name="game_name" id="game_name" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option value="">Wybierz grę</option>
+                        <option value="">Select a game</option>
                         @foreach($games as $game)
                             <option value="{{ $game->name }}" {{ request('game_name') == $game->name ? 'selected' : '' }}>{{ $game->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <!-- Filtrowanie po tagu gry -->
+                <!-- Filtering by game tag -->
                 <div>
-                    <label for="game_tag" class="block text-gray-700">Tagi gry</label>
+                    <label for="game_tag" class="block text-gray-700">Game Tags</label>
                     <select name="game_tag" id="game_tag" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option value="">Wybierz tag</option>
+                        <option value="">Select a tag</option>
                         @foreach($gameTags as $tag)
                             <option value="{{ $tag->name }}" {{ request('game_tag') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <!-- Przycisk submit -->
-                <div class="col-span-full sm:col-span-3 flex justify-center">
-                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Filtruj</button>
+                <!-- Filtering by status -->
+                <div>
+                    <label for="status" class="block text-gray-700">Status</label>
+                    <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md">
+                        <option value="">Select status</option>
+                        <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Open</option>
+                        <option value="scheduled" {{ request('status') == 'scheduled' ? 'selected' : '' }}>Scheduled</option>
+                        <option value="ongoing" {{ request('status') == 'ongoing' ? 'selected' : '' }}>Ongoing</option>
+                        <option value="finished" {{ request('status') == 'finished' ? 'selected' : '' }}>Finished</option>
+                    </select>
+                </div>
+
+                <!-- Submit button -->
+                <div class="col-span-full sm:col-span-2 flex justify-center">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Filter</button>
                 </div>
             </form>
         </div>
+
+
 
         <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> <!-- Zmiana na 3 kafelki w rzędzie na większych ekranach -->
             @foreach($tournaments as $tournament)
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105"> <!-- Zwiększenie paddingu i dodanie efektu hover -->
                     <img
                         src="{{ $tournament->games->image_path ? asset('storage/games/' . $tournament->games->image_path) : asset('images/not-found.jpg') }}"
-                        alt="Gra: {{ $tournament->games->name }}"
+                        alt="Game: {{ $tournament->games->name }}"
                         class="w-full h-48 object-cover rounded-lg"
                     />
                     <br>
