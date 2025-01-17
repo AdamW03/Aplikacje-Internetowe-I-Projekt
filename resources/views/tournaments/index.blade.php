@@ -63,9 +63,7 @@
             </form>
         </div>
 
-
-
-        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> <!-- Zmiana na 3 kafelki w rzędzie na większych ekranach -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($tournaments as $tournament)
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105"> <!-- Zwiększenie paddingu i dodanie efektu hover -->
                     <img

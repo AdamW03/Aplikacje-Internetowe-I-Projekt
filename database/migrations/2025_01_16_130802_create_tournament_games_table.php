@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tournament_id')->constrained('tournaments')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('draw')->default(0);
-            $table->foreignId('winner_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('winner_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

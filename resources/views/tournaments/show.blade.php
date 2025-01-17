@@ -5,13 +5,13 @@
             <!-- Edit and Delete buttons -->
             <div class="mt-4 flex justify-end">
                 <!-- Edit and Delete buttons -->
+                @auth
                 <div class="mt-4 flex justify-end">
                     @if(auth()->user()->role === 'admin' || $tournament->creator_id == auth()->id()) <!-- Check if the user is admin or creator -->
                     <a href="{{ route('tournaments.edit', $tournament->id) }}" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
                         Edit Tournament
                     </a>
                     @endif
-
                     @if(auth()->user()->role === 'admin' || $tournament->creator_id == auth()->id()) <!-- Check if the user is admin or creator -->
                     <form action="{{ route('tournaments.destroy', $tournament->id) }}" method="POST" class="ml-4">
                         @csrf
@@ -22,6 +22,7 @@
                     </form>
                     @endif
                 </div>
+                    @endauth
             </div>
         </x-slot>
 
