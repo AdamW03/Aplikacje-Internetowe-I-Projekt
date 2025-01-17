@@ -115,8 +115,8 @@ class TournamentController extends Controller
     {
         $validatedData = $request->validate([
             'game_id' => 'required|exists:games,id',
-            'creator_id' => 'required|exists:users,id',
-//            'name' => 'required|string|max:255',
+//            'creator_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after:start_date',
@@ -143,7 +143,7 @@ class TournamentController extends Controller
             'status' => $validatedData['status'],
         ]);
 
-        return redirect()->route('tournaments.index');
+        return redirect()->route('tournaments.show', $tournament->id);
     }
 
     /**
