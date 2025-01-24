@@ -14,7 +14,7 @@ class AdminUserController extends Controller
             $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        $users = $query->paginate(10);
+        $users = $query->paginate(25);
 
         return view('admin.index', compact('users'));
     }
