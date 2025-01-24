@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->text('description')->nullable();
             $table->string('avatars')->nullable();
+            $table->boolean('is_banned')->default(false);
+            $table->boolean('is_deleted')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

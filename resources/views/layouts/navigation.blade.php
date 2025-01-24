@@ -31,6 +31,11 @@
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('About') }}
                     </x-nav-link>
+                    @admin
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Admin Panel') }}
+                        </x-nav-link>
+                    @endadmin
                     @guest
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                             {{ __('Log In') }}

@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(GameTeam::class, 'game_team_user');
     }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->id === 1;
+    }
 }
