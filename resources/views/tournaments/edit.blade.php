@@ -8,13 +8,11 @@
             @csrf
             @method('PUT')
 
-            <!-- Tournament Name -->
             <div>
                 <label for="name" class="block text-gray-700">Tournament Name</label>
                 <input type="text" name="name" id="name" value="{{ old('name', $tournament->name) }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- Game Selection -->
             <div>
                 <label for="game_id" class="block text-gray-700">Game</label>
                 <select name="game_id" id="game_id" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -25,7 +23,6 @@
                 </select>
             </div>
 
-            <!-- Status Selection -->
             <div>
                 <label for="status" class="block text-gray-700">Status</label>
                 <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -36,13 +33,11 @@
                 </select>
             </div>
 
-            <!-- Description -->
             <div>
                 <label for="description" class="block text-gray-700">Description</label>
                 <textarea name="description" id="description" class="mt-1 block w-full border-gray-300 rounded-md" rows="4">{{ old('description', $tournament->description) }}</textarea>
             </div>
 
-            <!-- Start Date -->
             <div>
                 <label for="start_date" class="block text-gray-700">Start Date</label>
                 <input type="datetime-local" name="start_date" id="start_date"
@@ -50,7 +45,6 @@
                        class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- End Date (optional) -->
             <div>
                 <label for="end_date" class="block text-gray-700">End Date (optional)</label>
                 <input type="datetime-local" name="end_date" id="end_date"
@@ -59,25 +53,21 @@
             </div>
 
 
-            <!-- Location (optional) -->
             <div>
                 <label for="location" class="block text-gray-700">Location (optional)</label>
                 <input type="text" name="location" id="location" value="{{ old('location', $tournament->location) }}" class="mt-1 block w-full border-gray-300 rounded-md">
             </div>
 
-            <!-- Max Participants -->
             <div>
                 <label for="max_participants" class="block text-gray-700">Max Participants</label>
                 <input type="number" name="max_participants" id="max_participants" value="{{ old('max_participants', $tournament->max_participants) }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- Per Team (divisor of max participants) -->
             <div>
                 <label for="per_team" class="block text-gray-700">Participants per Team</label>
                 <input type="number" name="per_team" id="per_team" value="{{ old('per_team', $tournament->per_team) }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- Submit Button -->
 {{--            <div class="col-span-full sm:col-span-2 flex justify-center">--}}
 {{--                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Update Tournament</button>--}}
 {{--            </div>--}}
@@ -85,7 +75,7 @@
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full sm:w-auto">
                     Update Tournament
                 </button>
-                <a href="{{ route('tournaments.show', $tournament->id); }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
+                <a href="{{ route('tournaments.show', $tournament->id) }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
             </div>
         </form>
     </div>

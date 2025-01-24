@@ -13,7 +13,6 @@ Route::resource('tournaments', TournamentController::class);
 Route::get('/tournaments', [TournamentController::class, 'index'])->name('tournaments.index');
 Route::get('/tournaments/{id}', [TournamentController::class, 'show'])->name('tournaments.show');
 
-// Dostęp tylko dla zalogowanych użytkowników
 Route::middleware('auth')->group(function () {
     Route::get('/tournaments/create', [TournamentController::class, 'create'])->name('tournaments.create');
     Route::get('/tournaments/{id}/edit', [TournamentController::class, 'edit'])->name('tournaments.edit');
@@ -21,17 +20,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/tournaments/{id}', [TournamentController::class, 'update'])->name('tournaments.update');
     Route::delete('/tournaments/{id}', [TournamentController::class, 'destroy'])->name('tournaments.destroy');
 
-    // Akcje dołączenia i opuszczenia turnieju
     Route::post('/tournaments/{id}/join', [TournamentController::class, 'join'])->name('tournaments.join');
     Route::post('/tournaments/{id}/leave', [TournamentController::class, 'leave'])->name('tournaments.leave');
 });
 
 Route::resource('games', GameController::class);
-// Trasy dostępne dla każdego użytkownika (gościa i zalogowanego)
+
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/{id}', [GameController::class, 'show'])->name('games.show');
 
-// Trasy dostępne tylko dla zalogowanych użytkowników
 Route::middleware('auth')->group(function () {
     Route::post('/games', [GameController::class, 'store'])->name('games.store');
     Route::put('/games/{game}', [GameController::class, 'update'])->name('games.update');
@@ -42,14 +39,15 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/game_tags/{gameTag}/edit', [GameTagController::class, 'edit'])->name('game_tags.edit');
 });
 
+
 Route::resource('game_tags', GameTagController::class);
-// Trasy dostępne dla każdego użytkownika (gościa i zalogowanego)
+
 Route::get('/game_tags', [GameTagController::class, 'index'])->name('game_tags.index');
 Route::middleware('auth')->group(function () {
     Route::post('/game_tags', [GameTagController::class, 'store'])->name('game_tags.store');
 });
-// Trasy tylko dla administratorów
-Route::middleware(['auth', 'can:admin'])->group(function () {
+
+Route::middleware(['admin'])->group(function () {
     Route::get('/game_tags/create', [GameTagController::class, 'create'])->name('game_tags.create');
     Route::get('/game_tags/{gameTag}/edit', [GameTagController::class, 'edit'])->name('game_tags.edit');
 });

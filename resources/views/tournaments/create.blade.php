@@ -7,13 +7,13 @@
         <form action="{{ route('tournaments.store') }}" method="POST" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
             @csrf
 
-            <!-- Tournament Name -->
+{{--            Tournament Name--}}
             <div>
                 <label for="name" class="block text-gray-700">Tournament Name</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- Game Selection -->
+{{--            Game Selection--}}
             <div>
                 <label for="game_id" class="block text-gray-700">Game</label>
                 <select name="game_id" id="game_id" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -24,43 +24,43 @@
                 </select>
             </div>
 
-            <!-- Description -->
+{{--            Description--}}
             <div>
                 <label for="description" class="block text-gray-700">Description</label>
                 <textarea name="description" id="description" class="mt-1 block w-full border-gray-300 rounded-md" rows="4">{{ old('description') }}</textarea>
             </div>
 
-            <!-- Start Date -->
+{{--            Start Date--}}
             <div>
                 <label for="start_date" class="block text-gray-700">Start Date</label>
                 <input type="datetime-local" name="start_date" id="start_date" value="{{ old('start_date') }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- End Date (optional) -->
+{{--            End Date (optional)--}}
             <div>
                 <label for="end_date" class="block text-gray-700">End Date (optional)</label>
                 <input type="datetime-local" name="end_date" id="end_date" value="{{ old('end_date') }}" class="mt-1 block w-full border-gray-300 rounded-md">
             </div>
 
-            <!-- Location (optional) -->
+{{--            Location (optional)--}}
             <div>
                 <label for="location" class="block text-gray-700">Location (optional)</label>
                 <input type="text" name="location" id="location" value="{{ old('location') }}" class="mt-1 block w-full border-gray-300 rounded-md">
             </div>
 
-            <!-- Max Participants -->
+{{--            Max Participants--}}
             <div>
                 <label for="max_participants" class="block text-gray-700">Max Participants</label>
                 <input type="number" name="max_participants" id="max_participants" value="{{ old('max_participants') }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- Per Team (divisor of max participants) -->
+{{--            Per Team (divisor of max participants)--}}
             <div>
                 <label for="per_team" class="block text-gray-700">Participants per Team</label>
                 <input type="number" name="per_team" id="per_team" value="{{ old('per_team') }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
             </div>
 
-            <!-- Submit Button -->
+{{--            Submit Button--}}
             <div class="flex items-center justify-between col-span-full">
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full sm:w-auto">
                     Create Tournament

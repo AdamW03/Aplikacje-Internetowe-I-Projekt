@@ -4,7 +4,7 @@
             <h1 class="text-2xl font-semibold text-gray-800">Tournaments</h1>
         </x-slot>
 
-        <!-- Creating -->
+{{--        Creatin--}}
         @auth
             <div class="mb-6">
                 <div class="col-span-full sm:col-span-2 flex justify-center mt-4">
@@ -13,16 +13,14 @@
             </div>
         @endauth
 
-        <!-- Filtration -->
+{{--        Filtration--}}
         <div class="mb-6">
             <form action="{{ route('tournaments.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                <!-- Filtering by tournament name -->
                 <div>
                     <label for="tournament_name" class="block text-gray-700">Tournament Name</label>
                     <input type="text" name="tournament_name" id="tournament_name" value="{{ request('tournament_name') }}" class="mt-1 block w-full border-gray-300 rounded-md">
                 </div>
 
-                <!-- Filtering by game name -->
                 <div>
                     <label for="game_name" class="block text-gray-700">Game Name</label>
                     <select name="game_name" id="game_name" class="mt-1 block w-full border-gray-300 rounded-md">
@@ -33,7 +31,6 @@
                     </select>
                 </div>
 
-                <!-- Filtering by game tag -->
                 <div>
                     <label for="game_tag" class="block text-gray-700">Game Tags</label>
                     <select name="game_tag" id="game_tag" class="mt-1 block w-full border-gray-300 rounded-md">
@@ -44,7 +41,6 @@
                     </select>
                 </div>
 
-                <!-- Filtering by status -->
                 <div>
                     <label for="status" class="block text-gray-700">Status</label>
                     <select name="status" id="status" class="mt-1 block w-full border-gray-300 rounded-md">
@@ -56,7 +52,6 @@
                     </select>
                 </div>
 
-                <!-- Submit button -->
                 <div class="col-span-full sm:col-span-2 flex justify-center">
                     <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Filter</button>
                 </div>
@@ -65,7 +60,7 @@
 
         <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($tournaments as $tournament)
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105"> <!-- Zwiększenie paddingu i dodanie efektu hover -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:scale-105">
                     <img
                         src="{{ $tournament->games->image_path ? asset('storage/games/' . $tournament->games->image_path) : asset('images/not-found.jpg') }}"
                         alt="Game: {{ $tournament->games->name }}"
@@ -92,7 +87,6 @@
             @endforeach
         </div>
 
-        <!-- Paginate links -->
         <div class="mt-6">
             {{ $tournaments->links() }}
         </div>

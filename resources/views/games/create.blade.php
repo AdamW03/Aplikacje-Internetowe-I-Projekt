@@ -14,7 +14,7 @@
                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                            value="{{ old('name') }}" required autofocus autocomplete="name">
                     @error('name')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -24,7 +24,7 @@
                               class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                     >{{ old('description') }}</textarea>
                     @error('description')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -34,7 +34,7 @@
                     <input type="file" id="image_path" name="image_path"
                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md" accept="image/*">
                     @error('image_path')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -49,7 +49,7 @@
                         @endforeach
                     </select>
                     @error('game_tags')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 

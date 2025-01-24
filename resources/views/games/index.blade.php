@@ -12,17 +12,15 @@
             </div>
         @endadmin
 
-        <!-- Filtration -->
+{{--        Filtration--}}
         <div class="mb-6">
             <form action="{{ route('games.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                <!-- Filtering by game name -->
                 <div>
                     <label for="game_name" class="block text-sm font-medium text-gray-700">Game Name</label>
                     <input type="text" name="game_name" id="game_name" value="{{ request('game_name') }}"
                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                 </div>
 
-                <!-- Filtering by game tag -->
                 <div>
                     <label for="game_tag" class="block text-sm font-medium text-gray-700">Game Tag</label>
                     <select name="game_tag" id="game_tag" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
@@ -33,7 +31,6 @@
                     </select>
                 </div>
 
-                <!-- Submit button -->
                 <div class="col-span-full sm:col-span-2 flex justify-center">
                     <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Filter Games</button>
                 </div>
@@ -67,12 +64,12 @@
                                 View Details
                             </a>
                             @admin
-                            <a href="{{ route('games.edit', $game) }}" class="text-blue-500 hover:underline">Edit</a>
-                            <form method="POST" action="{{ route('games.destroy', $game) }}" onsubmit="return confirm('Are you sure you want to delete this Game?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                            </form>
+                                <a href="{{ route('games.edit', $game) }}" class="text-blue-500 hover:underline">Edit</a>
+                                <form method="POST" action="{{ route('games.destroy', $game) }}" onsubmit="return confirm('Are you sure you want to delete this Game?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                </form>
                             @endadmin
                         </td>
                     </tr>

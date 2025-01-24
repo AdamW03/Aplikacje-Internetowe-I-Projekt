@@ -14,7 +14,7 @@
                     <input type="text" name="name" id="name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                            value="{{ old('name', $game->name) }}" required>
                     @error('name')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -23,7 +23,7 @@
                     <textarea name="description" id="description" rows="4"
                               class="mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ old('description', $game->description) }}</textarea>
                     @error('description')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -31,7 +31,7 @@
                     <label for="image_path" class="block text-sm font-medium text-gray-700">Change Game Image (optional)</label>
                     <input type="file" id="image_path" name="image_path" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" accept="image/*"/>
                     @error('image_path')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -45,7 +45,7 @@
                         @endforeach
                     </select>
                     @error('game_tags')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 

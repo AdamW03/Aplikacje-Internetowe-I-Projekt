@@ -18,7 +18,7 @@ class GameFactory extends Factory
     {
         return [
             'name' => $this->faker->words(3, true),
-            'description' => $this->faker->paragraph(30),
+            'description' => $this->faker->paragraph(20),
 //            'image_path' => $this->faker->optional()->imageUrl(640, 480, 'games', true, 'Game Image'),
         ];
     }

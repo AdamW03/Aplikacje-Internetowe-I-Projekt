@@ -41,9 +41,7 @@
                         @endif
                     </p>
                 </div>
-
-
-
+                
                 <br>
                 <div class="mt-6">
                     <p class="text-gray-600 text-base text-center mx-4 mt-4">
