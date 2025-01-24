@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\GameTag;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
@@ -12,9 +13,22 @@ class GameController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 25);
-        $games = Game::paginate($perPage);
-        return view('games.index', compact('games'));
+        $query = Game::with('game_tags');
+
+        if ($request->has('game_name') && $request->game_name) {
+            $query->where('name', 'like', '%' . $request->game_name . '%');
+        }
+
+        if ($request->has('game_tag') && $request->game_tag) {
+            $query->whereHas('game_tags', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->game_tag . '%');
+            });
+        }
+
+
+        $games = $query->paginate(20);
+        $gameTags = GameTag::all();
+        return view('games.index', compact('games','gameTags'));
     }
 
     /**
@@ -22,7 +36,8 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('games.create');
+        $gameTags = GameTag::all();
+        return view('games.create', compact('gameTags'));
     }
 
     /**
@@ -33,7 +48,7 @@ class GameController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
-            'image_path' => 'nullable|string',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'game_tags' => 'nullable|array',
             'game_tags.*' => 'exists:game_tags,id',
         ]);
@@ -41,12 +56,20 @@ class GameController extends Controller
         $game = Game::create([
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
-            'image_path' => $validatedData['image_path'] ?? null,
         ]);
+
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('games', 'public');
+            $fileName = basename($imagePath);
+            $validatedData['image_path'] = $fileName;
+        }
+        $game->fill($validatedData);
 
         if (isset($validatedData['game_tags'])) {
             $game->game_tags()->sync($validatedData['game_tags']);
         }
+
+        $game->save();
 
         return redirect()->route('games.index')->with('success', 'Game created successfully!');
     }
@@ -66,35 +89,35 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        return view('games.edit', compact('game'));
+        $gameTags = GameTag::all();
+        return view('games.edit', compact('game', 'gameTags'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Game $game)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'image_path' => 'nullable|string',
+            'description' => 'required|string',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'game_tags' => 'nullable|array',
-            'game_tags.*' => 'exists:game_tags,id',
+            'game_tags.*' => 'exists:game_tags,id'
         ]);
 
-        $game = Game::findOrFail($id);
-        $game->update([
-            'name' => $validatedData['name'],
-            'description' => $validatedData['description'],
-            'image_path' => $validatedData['image_path'] ?? null,
-        ]);
-
-        if (isset($validatedData['game_tags'])) {
-            $game->gameTags()->sync($validatedData['game_tags']);
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('games','public');
+            $fileName = basename($imagePath);
+            $validatedData['image_path'] = $fileName;
         }
 
-        return redirect()->route('games.index')->with('success', 'Game updated successfully!');
+        $game->fill($validatedData);
+        $game->save();
 
+        $game->game_tags()->sync($validatedData['game_tags']);
+
+        return redirect()->route('games.index')->with('success', 'Gra została zaktualizowana.');
     }
 
 
@@ -104,6 +127,6 @@ class GameController extends Controller
     public function destroy(Game $game)
     {
         $game->delete();
-        return redirect()->route('game.index');
+        return redirect()->route('games.index')->with('success', 'Game deleted successfully!');
     }
 }

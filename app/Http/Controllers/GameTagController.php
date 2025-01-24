@@ -12,8 +12,14 @@ class GameTagController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 25);
-        $gameTags = GameTag::paginate($perPage);
+        $query = GameTag::query();
+
+        if ($request->has('tag_name') && $request->tag_name) {
+            $query->where('name', 'like', '%' . $request->tag_name . '%');
+        }
+
+        $gameTags = $query->paginate(20);
+
         return view('game_tags.index', compact('gameTags'));
     }
 

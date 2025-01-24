@@ -2,28 +2,28 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <x-slot name="header">
             <h1 class="text-2xl font-semibold text-gray-800">Game: {{ $game->name }}</h1>
-            <!-- Edit and Delete buttons -->
-{{--            <div class="mt-4 flex justify-end">--}}
-{{--                @admin--}}
-{{--                    <a href="{{ route('games.edit', $game->id) }}" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">--}}
-{{--                        Edit Game--}}
-{{--                    </a>--}}
-{{--                    <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="ml-4">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700" onclick="return confirm('Are you sure you want to delete this game?')">--}}
-{{--                            Delete Game--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
-{{--                @endadmin--}}
-{{--            </div>--}}
+{{--            Edit and Delete buttons--}}
+            <div class="mt-4 flex justify-end">
+                @admin
+                    <a href="{{ route('games.edit', $game->id) }}" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">
+                        Edit Game
+                    </a>
+                    <form action="{{ route('games.destroy', $game->id) }}" method="POST" class="ml-4">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700" onclick="return confirm('Are you sure you want to delete this game?')">
+                            Delete Game
+                        </button>
+                    </form>
+                @endadmin
+            </div>
         </x-slot>
 
         <div class="bg-white p-6 rounded-lg shadow-lg">
             <img
                 src="{{ $game->image_path ? asset('storage/games/' . $game->image_path) : asset('images/not-found.jpg') }}"
                 alt="Game: {{ $game->name }}"
-                class="w-full h-96 object-cover rounded-lg"
+                class="max-w-full max-h-[500px] object-contain rounded-lg mx-auto"
             />
             <div class="mt-6">
                 <h3 class="text-2xl font-semibold text-gray-800 text-center">{{ $game->name }}</h3>

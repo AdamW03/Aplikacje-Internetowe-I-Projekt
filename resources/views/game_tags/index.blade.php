@@ -4,12 +4,28 @@
             <h1 class="text-2xl font-semibold text-gray-800">Game Tags</h1>
         </x-slot>
 
-        <div class="mb-4">
-            @admin
-            <a href="{{ route('game_tags.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full block text-center">
-                Create New Game Tag
-            </a>
-            @endadmin
+        @admin
+            <div class="mb-4">
+                <a href="{{ route('game_tags.create') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-600 w-full block text-center">
+                    Create New Game Tag
+                </a>
+            </div>
+        @endadmin
+
+        <!-- Filtration -->
+        <div class="mb-6">
+            <form action="{{ route('game_tags.index') }}" method="GET">
+                <!-- Filtering by tag name -->
+                <div class="mb-4">
+                    <label for="tag_name" class="block text-sm font-medium text-gray-700">Tag Name</label>
+                    <input type="text" name="tag_name" id="tag_name" value="{{ request('tag_name') }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <!-- Submit button -->
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filter Game Tags</button>
+                </div>
+            </form>
         </div>
 
         <div class="bg-white shadow-md rounded-lg overflow-hidden">

@@ -37,7 +37,7 @@ class TournamentController extends Controller
             $query->where('status', $request->status);
         }
 
-        $tournaments = $query->paginate(10);
+        $tournaments = $query->paginate(15);
 
         $games = Game::all();
         $gameTags = GameTag::all();
